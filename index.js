@@ -87,7 +87,7 @@ const LS_DATOS = "LS_DATOS";
     
             const p = document.createElement("p");
             p.classList.add("precio-pizza");
-            p.textContent = pizza.precio;
+            p.textContent = "$" + pizza.precio;
 
             contenedor.appendChild(div);
             div.appendChild(h3);
@@ -133,7 +133,7 @@ ingredientesPizza = (pizza) => {
 
   const p = document.createElement("p");
             p.classList.add("ingredientes");
-            p.innerText = pizza.ingredientes;
+            p.innerText = `Ingredientes: ${pizza.ingredientes}.` ;
 
  contenedor.appendChild(p);
 }
