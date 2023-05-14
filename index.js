@@ -127,18 +127,6 @@ const LS_DATOS = "LS_DATOS";
   
 } 
 
-init = () => {
-
-  const pizzaString = localStorage.getItem(LS_DATOS);
-  if(pizzaString !== null){
-    const pizza = JSON.parse(pizzaString);
-    mostrarPizza(pizza);
-  }
-  
-}
-
-init();
-
 ingredientesPizza = (pizza) => {
 
   const contenedor = document.querySelector(".contenedor-pizza");
@@ -149,3 +137,16 @@ ingredientesPizza = (pizza) => {
 
  contenedor.appendChild(p);
 }
+
+init = () => {
+
+  const pizzaString = localStorage.getItem(LS_DATOS);
+  if(pizzaString !== null){
+    const pizza = JSON.parse(pizzaString);
+    mostrarPizza(pizza);
+    ingredientesPizza(pizza);
+  }
+  
+}
+
+init();
