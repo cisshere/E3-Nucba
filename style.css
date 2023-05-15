@@ -45,6 +45,7 @@ input {
     color: white;
     font-weight: bold;
     letter-spacing: 0.063rem;
+    cursor: pointer;
 }
 
 /************** pizza **********/
