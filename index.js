@@ -46,17 +46,18 @@ const pizzas = [
   },
 ];
 
-
+const LS_DATOS = "LS_DATOS";
+const contenedor = document.querySelector(".contenedor");
+const inputNumber = document.querySelector("#input-number");
+const contenedorError = document.querySelector(".contenedor-error");
 
 
 const error = (msj) => {
-  const contenedor = document.querySelector(".contenedor");
-    contenedor.innerHTML = "";
 
-  const inputNumber = document.querySelector("#input-number");
+  contenedor.innerHTML = "";
+
   inputNumber.classList.add("msj-error");
 
-  const contenedorError = document.querySelector(".contenedor-error");
   contenedorError.innerHTML = "";
   
   const small = document.createElement("small");
@@ -65,14 +66,11 @@ const error = (msj) => {
 
   contenedorError.appendChild(small);
 }
-    
-const LS_DATOS = "LS_DATOS";
 
 
  const mostrarPizza = (pizza) => {
-
-  const contenedor = document.querySelector(".contenedor");
-    contenedor.innerHTML = "";
+   
+  contenedor.innerHTML = "";
 
   const div = document.createElement("div");
            div.classList.add("contenedor-pizza");
@@ -89,19 +87,22 @@ const LS_DATOS = "LS_DATOS";
             p.classList.add("precio-pizza");
             p.textContent = "$" + pizza.precio;
 
+            const ingredientes = document.createElement("p");
+            ingredientes.classList.add("ingredientes");
+            ingredientes.innerText = `Ingredientes: ${pizza.ingredientes}.`;
+
             contenedor.appendChild(div);
             div.appendChild(h3);
             div.appendChild(img);
             div.appendChild(p);
+            div.appendChild(ingredientes);
 
  }
 
  const buscarPizza = () => {
-    const inputNumber = document.querySelector("#input-number");
+
     let number = inputNumber.value;
     inputNumber.classList.remove("msj-error");
-
-    const contenedorError = document.querySelector(".contenedor-error");
     contenedorError.innerHTML = "";
 
     if (number.trim() === ""){
@@ -109,13 +110,11 @@ const LS_DATOS = "LS_DATOS";
       return;
     }
 
-    
     for (let i = 0; i < pizzas.length; i++) {
       const pizza = pizzas[i];
       if (pizza.id == number) {
 
         mostrarPizza(pizza);
-        ingredientesPizza(pizza);
 
             localStorage.setItem(LS_DATOS,JSON.stringify(pizza));
             return;
@@ -127,24 +126,12 @@ const LS_DATOS = "LS_DATOS";
   
 } 
 
-ingredientesPizza = (pizza) => {
-
-  const contenedor = document.querySelector(".contenedor-pizza");
-
-  const p = document.createElement("p");
-            p.classList.add("ingredientes");
-            p.innerText = `Ingredientes: ${pizza.ingredientes}.` ;
-
- contenedor.appendChild(p);
-}
-
 init = () => {
 
   const pizzaString = localStorage.getItem(LS_DATOS);
   if(pizzaString !== null){
     const pizza = JSON.parse(pizzaString);
     mostrarPizza(pizza);
-    ingredientesPizza(pizza);
   }
   
 }
